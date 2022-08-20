@@ -7,6 +7,7 @@
     <form (ngSubmit)="save(myForm)" #myForm="ngForm" autocomplete="off">
       <article class="mb-3 row">
         <label for="" class="col-sm-3 col-form-label">Producto</label>
+
         <div class="col-sm-9">
           <input
             ngModel
@@ -14,14 +15,21 @@
             class="form-control"
             type="text"
             placeholder="Nombre del producto"
-            required=""
+            required
+            minlength="3"
           />
-          <span class="form-text text-danger"> Debe de ser de 3 letras </span>
+          <span
+            *ngIf="myForm.controls?.['product']?.invalid && myForm.touched"
+            class="form-text text-danger"
+          >
+            Debe de ser de 3 letras
+          </span>
         </div>
       </article>
 
       <article class="mb-3 row">
         <label for="" class="col-sm-3 col-form-label">Precio</label>
+
         <div class="col-sm-9">
           <input
             ngModel
@@ -29,13 +37,14 @@
             class="form-control"
             type="number"
             placeholder="Precio del producto"
-            required=""
+            required
           />
         </div>
       </article>
 
       <article class="mb-3 row">
         <label for="" class="col-sm-3 col-form-label">Stock</label>
+
         <div class="col-sm-9">
           <input
             ngModel
@@ -43,7 +52,7 @@
             class="form-control"
             type="number"
             placeholder="Stock del producto"
-            required=""
+            required
           />
         </div>
       </article>
@@ -63,6 +72,20 @@
   <div class="col">
     <span>Valid</span>
     <pre>{{ myForm.valid }}</pre>
+  </div>
+
+  <!-- Pristine indica que no se han tocado lo valores del form -->
+  <!-- los valores por defecto -->
+  <div class="col">
+    <span>Pristine</span>
+    <pre>{{ myForm.pristine }}</pre>
+  </div>
+
+  <!-- indica si el usuario ha tocado el formulario -->
+  <!-- ha si no hay hecho un cambio -->
+  <div class="col">
+    <span>Touche</span>
+    <pre>{{ myForm.touched }}</pre>
   </div>
 
   <div class="col">
