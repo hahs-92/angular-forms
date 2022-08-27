@@ -9,6 +9,12 @@ import { NgForm } from '@angular/forms';
 export class BasicsComponent {
   @ViewChild('myForm') myForm!: NgForm; //obtenemos la ref del html
 
+  initForm = {
+    product: '',
+    price: 0,
+    stock: 0,
+  };
+
   isValidName() {
     return (
       this.myForm?.controls?.['product']?.invalid &&
@@ -32,5 +38,11 @@ export class BasicsComponent {
   // }
 
   //view child
-  save() {}
+  save() {
+    console.log('sending...');
+    this.myForm.resetForm({
+      price: 0,
+      stock: 0,
+    });
+  }
 }
