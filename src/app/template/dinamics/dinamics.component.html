@@ -1,1 +1,71 @@
-<p>dinamics works!</p>
+<h2>Template: <small>Dinamicos</small></h2>
+<hr />
+
+<form #myForm="ngForm" (ngSubmit)="save()" autocomplete="off">
+  <section class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Nombre</label>
+    <div class="col-sm-9">
+      <input
+        [ngModel]="person.name"
+        type="text"
+        class="form-control"
+        name="name"
+        placeholder="Nombre del usuario"
+        required
+      />
+      <span
+        *ngIf="myForm?.controls?.['name']?.errors && myForm?.controls?.['name']?.touched"
+        class="form-text text-danger"
+      >
+        Este campo es obligatorio
+      </span>
+    </div>
+  </section>
+
+  <section class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Agregar</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          placeholder="Agregar Favorito"
+          required
+        />
+        <button type="button" class="btn btn-outline-primary">Agregar</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Favorites</label>
+    <div class="col-sm-9">
+      <input
+        *ngFor="let fav of person.favorites; let i = index"
+        [(ngModel)]="fav.name"
+        name="favorite_{{ i }}"
+        type="text"
+        class="form-control mb-1"
+        name="name"
+        required
+      />
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="col-sm-12">
+      <button
+        [disabled]="myForm.invalid"
+        class="btn btn-primary float-end"
+        type="button"
+        (click)="save()"
+      >
+        Save
+      </button>
+    </div>
+  </section>
+</form>
+
+<span>Persona</span>
+<pre>{{ person | json }}</pre>
