@@ -6,14 +6,19 @@ import { NgForm } from '@angular/forms';
   templateUrl: './basics.component.html',
   styleUrls: ['./basics.component.css'],
 })
-export class BasicsComponent implements OnInit {
-  constructor() {}
+export class BasicsComponent {
+  @ViewChild('myForm') myForm!: NgForm;
 
-  ngOnInit(): void {}
+  isValidName() {
+    return this.myForm?.controls?.['product']?.invalid && this.myForm.touched;
+  }
 
-  save(myForm: NgForm) {
-    console.log(myForm.value);
+  // save(myForm: NgForm) {
+  //   console.log(myForm.value);
+  // }
+
+  //view child
+  save() {
+    console.log(this.myForm.value);
   }
 }
-
-// section 16: 236 => ViewChild

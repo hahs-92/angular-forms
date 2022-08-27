@@ -4,7 +4,7 @@
 
 <main class="row">
   <section class="col">
-    <form (ngSubmit)="save(myForm)" #myForm="ngForm" autocomplete="off">
+    <form (ngSubmit)="save()" #myForm="ngForm" autocomplete="off">
       <article class="mb-3 row">
         <label for="" class="col-sm-3 col-form-label">Producto</label>
 
@@ -18,10 +18,11 @@
             required
             minlength="3"
           />
-          <span
+          <span *ngIf="isValidName()" class="form-text text-danger">
+            <!-- <span
             *ngIf="myForm.controls?.['product']?.invalid && myForm.touched"
             class="form-text text-danger"
-          >
+          > -->
             Debe de ser de 3 letras
           </span>
         </div>
