@@ -7,10 +7,24 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./basics.component.css'],
 })
 export class BasicsComponent {
-  @ViewChild('myForm') myForm!: NgForm;
+  @ViewChild('myForm') myForm!: NgForm; //obtenemos la ref del html
 
   isValidName() {
-    return this.myForm?.controls?.['product']?.invalid && this.myForm.touched;
+    return (
+      this.myForm?.controls?.['product']?.invalid &&
+      this.myForm?.controls?.['product']?.touched
+    );
+  }
+
+  isValidPrice() {
+    const isTouch = this.myForm?.controls?.['price']?.touched;
+    const isValid = this.myForm?.controls?.['price']?.invalid;
+
+    // con min del html podemos reemplazar esta linea
+    // por la de isValid
+    //const isGreaterThanZero = this.myForm?.controls?.['price']?.value < 0;
+
+    return isTouch && isValid;
   }
 
   // save(myForm: NgForm) {
@@ -18,7 +32,5 @@ export class BasicsComponent {
   // }
 
   //view child
-  save() {
-    console.log(this.myForm.value);
-  }
+  save() {}
 }

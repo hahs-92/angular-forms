@@ -38,8 +38,13 @@
             class="form-control"
             type="number"
             placeholder="Precio del producto"
+            min="0"
             required
           />
+
+          <span *ngIf="isValidPrice()" class="form-text text-danger">
+            El precio debe ser mayor a 0.
+          </span>
         </div>
       </article>
 
@@ -60,7 +65,11 @@
 
       <article class="row">
         <div class="col">
-          <button type="submit" class="btn btn-primary float-end">
+          <button
+            [disabled]="myForm.invalid"
+            type="submit"
+            class="btn btn-primary float-end"
+          >
             Guardar
           </button>
         </div>
