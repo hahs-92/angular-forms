@@ -29,11 +29,18 @@
         <input
           type="text"
           class="form-control"
-          name="name"
+          [(ngModel)]="newGame"
+          name="newGame"
+          (keyup.enter)="addNewGame()"
           placeholder="Agregar Favorito"
-          required
         />
-        <button type="button" class="btn btn-outline-primary">Agregar</button>
+        <button
+          (click)="addNewGame()"
+          type="button"
+          class="btn btn-outline-primary"
+        >
+          Agregar
+        </button>
       </div>
     </div>
   </section>
@@ -41,15 +48,26 @@
   <section class="mb-3 row">
     <label class="col-sm-3 col-form-label">Favorites</label>
     <div class="col-sm-9">
-      <input
+      <div
+        class="input-group mb-1"
         *ngFor="let fav of person.favorites; let i = index"
-        [(ngModel)]="fav.name"
-        name="favorite_{{ i }}"
-        type="text"
-        class="form-control mb-1"
-        name="name"
-        required
-      />
+      >
+        <input
+          [(ngModel)]="fav.name"
+          name="favorite_{{ i }}"
+          type="text"
+          class="form-control"
+          name="name"
+          required
+        />
+        <button
+          type="button"
+          (click)="deleteFav(i)"
+          class="btn btn-outline-danger"
+        >
+          Eliminar
+        </button>
+      </div>
     </div>
   </section>
 
@@ -61,7 +79,7 @@
         type="button"
         (click)="save()"
       >
-        Save
+        Guardar
       </button>
     </div>
   </section>

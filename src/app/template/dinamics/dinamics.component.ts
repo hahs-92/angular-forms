@@ -30,6 +30,22 @@ export class DinamicsComponent {
     ],
   };
 
+  newGame = '';
+
+  deleteFav(index: number) {
+    this.person.favorites.splice(index, 1);
+  }
+
+  addNewGame() {
+    const newFav: Fav = {
+      id: this.person.favorites.length + 1,
+      name: this.newGame,
+    };
+
+    this.person.favorites.push({ ...newFav });
+    this.newGame = '';
+  }
+
   save() {
     console.log('sending..');
   }
