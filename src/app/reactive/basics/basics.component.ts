@@ -34,11 +34,11 @@ export class BasicsComponent implements OnInit {
     //establecer valores al formualrio
     //debemos enviar setear los valores de todos los valores
     //podemo sutilizar patchValue para no tener que setear todos los values
-    this.myForm.setValue({
-      name: '',
-      price: 0,
-      stock: 0,
-    });
+    // this.myForm.setValue({
+    //   name: '',
+    //   price: 0,
+    //   stock: 0,
+    // });
   }
 
   isValidField(field: string) {

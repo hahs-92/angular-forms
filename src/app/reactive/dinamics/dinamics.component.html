@@ -1,7 +1,7 @@
 <h2>Reactivos: <small>Dinamicos</small></h2>
 <hr />
 
-<form autocomplete="off">
+<form autocomplete="off" [formGroup]="myForm" (ngSubmit)="save()">
   <section class="mb-3 row">
     <label class="col-sm-3 col-form-label">Nombre</label>
     <div class="col-sm-9">
@@ -9,9 +9,12 @@
         type="text"
         class="form-control"
         name="name"
+        formControlName="name"
         placeholder="Nombre del usuario"
       />
-      <span class="form-text text-danger"> Este campo es obligatorio </span>
+      <span *ngIf="isValidField('name')" class="form-text text-danger">
+        Este campo es obligatorio
+      </span>
     </div>
   </section>
 
@@ -23,29 +26,54 @@
           type="text"
           class="form-control"
           name="newGame"
+          [formControl]="newGame"
+          (keyup.enter)="addFav()"
           placeholder="Agregar Favorito"
         />
-        <button type="button" class="btn btn-outline-primary">Agregar</button>
+        <button
+          (click)="addFav()"
+          type="button"
+          class="btn btn-outline-primary"
+        >
+          Agregar
+        </button>
       </div>
     </div>
   </section>
 
   <section class="mb-3 row">
     <label class="col-sm-3 col-form-label">Favorites</label>
-    <div class="col-sm-9">
-      <!-- <div class="input-group mb-1">
-        <input type="text" class="form-control" name="name" />
+    <div formArrayName="favs" class="col-sm-9">
+      <div
+        *ngFor="let fav of favsArr.controls; let i = index"
+        class="input-group mb-1"
+      >
+        <input
+          name="fav"
+          [formControlName]="i"
+          type="text"
+          class="form-control"
+        />
         <button type="button" class="btn btn-outline-danger">Eliminar</button>
-      </div> -->
+      </div>
     </div>
   </section>
 
   <section class="row">
     <div class="col-sm-12">
-      <button class="btn btn-primary float-end" type="button">Guardar</button>
+      <button class="btn btn-primary float-end" type="submit">Guardar</button>
     </div>
   </section>
 </form>
 
-<!-- <span>Persona</span>
-<pre>{{ person | json }}</pre> -->
+<span>Valid</span>
+<pre>{{ myForm.valid }}</pre>
+
+<span>Value</span>
+<pre>{{ myForm.value | json }}</pre>
+
+<span>newGame</span>
+<pre>{{ newGame.value | json }}</pre>
+
+<span>newGame</span>
+<pre>{{ newGame.valid | json }}</pre>
