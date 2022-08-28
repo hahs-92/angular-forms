@@ -4,7 +4,7 @@
 
 <main class="row">
   <section class="col">
-    <form autocomplete="off" [formGroup]="myForm">
+    <form (ngSubmit)="save()" autocomplete="off" [formGroup]="myForm">
       <article class="mb-3 row">
         <label for="" class="col-sm-3 col-form-label">Producto</label>
 
@@ -17,7 +17,9 @@
             type="text"
             placeholder="Nombre del producto"
           />
-          <span class="form-text text-danger"> Debe de ser de 3 letras </span>
+          <span *ngIf="isValidField('name')" class="form-text text-danger">
+            Debe de ser de 3 letras
+          </span>
         </div>
       </article>
 
@@ -33,7 +35,7 @@
             placeholder="Precio del producto"
           />
 
-          <span class="form-text text-danger">
+          <span *ngIf="isValidField('price')" class="form-text text-danger">
             El precio debe ser mayor a 0.
           </span>
         </div>
@@ -50,16 +52,15 @@
             type="number"
             placeholder="Stock del producto"
           />
+          <span *ngIf="isValidField('stock')" class="form-text text-danger">
+            El Stock debe ser mayor a 0.
+          </span>
         </div>
       </article>
 
       <article class="row">
         <div class="col">
-          <button
-            type="submit"
-            [disabled]="myForm.invalid"
-            class="btn btn-primary float-end"
-          >
+          <button type="submit" class="btn btn-primary float-end">
             Guardar
           </button>
         </div>
