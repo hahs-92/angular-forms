@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-basics',
@@ -8,9 +13,12 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class BasicsComponent {
   myForm: FormGroup = this.fb.group({
-    name: ['valor inicial'],
-    price: [0],
-    stock: [0],
+    name: [
+      '', //valor inicial
+      [Validators.required, Validators.minLength(3)], // validadores sincronos
+    ],
+    price: [0, [Validators.required, Validators.min(0)]],
+    stock: [0, [Validators.required, Validators.min(0)]],
   });
 
   // myForm: FormGroup = new FormGroup({
@@ -19,5 +27,5 @@ export class BasicsComponent {
   //   stock: new FormControl(0),
   // });
 
-  constructor(public fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {}
 }
