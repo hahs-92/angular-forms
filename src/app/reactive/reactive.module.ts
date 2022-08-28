@@ -5,17 +5,10 @@ import { ReactiveRoutingModule } from './reactive-routing.module';
 import { BasicsComponent } from './basics/basics.component';
 import { DinamicsComponent } from './dinamics/dinamics.component';
 import { SwitchesComponent } from './switches/switches.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    BasicsComponent,
-    DinamicsComponent,
-    SwitchesComponent
-  ],
-  imports: [
-    CommonModule,
-    ReactiveRoutingModule
-  ]
+  declarations: [BasicsComponent, DinamicsComponent, SwitchesComponent],
+  imports: [CommonModule, ReactiveRoutingModule, ReactiveFormsModule],
 })
-export class ReactiveModule { }
+export class ReactiveModule {}

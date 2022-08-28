@@ -1,1 +1,85 @@
-<p>basics works!</p>
+<h2>Reactivos: Básicos</h2>
+
+<hr />
+
+<main class="row">
+  <section class="col">
+    <form autocomplete="off" [formGroup]="myForm">
+      <article class="mb-3 row">
+        <label for="" class="col-sm-3 col-form-label">Producto</label>
+
+        <!-- formControlName="name" para que angular conozca cual es el control -->
+        <div class="col-sm-9">
+          <input
+            name="product"
+            formControlName="name"
+            class="form-control"
+            type="text"
+            placeholder="Nombre del producto"
+          />
+          <span class="form-text text-danger"> Debe de ser de 3 letras </span>
+        </div>
+      </article>
+
+      <article class="mb-3 row">
+        <label for="" class="col-sm-3 col-form-label">Precio</label>
+
+        <div class="col-sm-9">
+          <input
+            name="price"
+            class="form-control"
+            type="number"
+            placeholder="Precio del producto"
+          />
+
+          <span class="form-text text-danger">
+            El precio debe ser mayor a 0.
+          </span>
+        </div>
+      </article>
+
+      <article class="mb-3 row">
+        <label for="" class="col-sm-3 col-form-label">Stock</label>
+
+        <div class="col-sm-9">
+          <input
+            name="stock"
+            class="form-control"
+            type="number"
+            placeholder="Stock del producto"
+          />
+        </div>
+      </article>
+
+      <article class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-end">
+            Guardar
+          </button>
+        </div>
+      </article>
+    </form>
+  </section>
+</main>
+
+<section class="row">
+  <div class="col">
+    <span>Valid</span>
+    <pre>{{ myForm.valid }}</pre>
+  </div>
+
+  <div class="col">
+    <span>Pristine</span>
+    <pre>{{ myForm.pristine }}</pre>
+  </div>
+
+  <div class="col">
+    <span>Touche</span>
+    <pre>{{ myForm.touched }}</pre>
+  </div>
+
+  <div class="col">
+    <span>Valid</span>
+    <pre>{{ myForm.value | json }}</pre>
+  </div>
+</section>
