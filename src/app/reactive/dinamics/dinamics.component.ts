@@ -52,6 +52,10 @@ export class DinamicsComponent {
     this.newGame.reset();
   }
 
+  deleteFav(index: number) {
+    this.favsArr.removeAt(index);
+  }
+
   save() {
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched(); //mostar los errores de validaiones
@@ -61,3 +65,5 @@ export class DinamicsComponent {
     this.myForm.reset();
   }
 }
+
+//=> 258 eliminar
