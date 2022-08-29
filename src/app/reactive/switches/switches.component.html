@@ -1,7 +1,7 @@
 <h2>Switches</h2>
 <hr />
 
-<form class="control-form">
+<form (ngSubmit)="save()" [formGroup]="myForm" class="control-form">
   <section class="row mb-3">
     <label class="col-sm-3 col-form-label">Genero</label>
 
@@ -11,7 +11,7 @@
           class="form-check-input"
           type="radio"
           value="M"
-          name="radioGenero"
+          formControlName="genre"
           id="masculino"
           required
         />
@@ -22,7 +22,7 @@
           class="form-check-input"
           type="radio"
           value="F"
-          name="radioGenero"
+          formControlName="genre"
           id="femenino"
           required
         />
@@ -38,7 +38,7 @@
       <div class="form-check form-switch mt-2">
         <input
           class="form-check-input"
-          name="notifications"
+          formControlName="notifications"
           type="checkbox"
           role="switch"
           id="notificaciones"
@@ -58,8 +58,7 @@
         <input
           class="form-check-input"
           type="checkbox"
-          name="terms"
-          value=""
+          formControlName="terms"
           id="condiciones"
           required
         />
@@ -72,11 +71,11 @@
 
   <section class="row">
     <div class="col">
-      <button class="btn btn-primary float-end">Guardar</button>
+      <button type="submit" class="btn btn-primary float-end">Guardar</button>
     </div>
   </section>
 </form>
-<!--
+
 <h5>Valor del formulario</h5>
 <pre>{{ myForm.value | json }}</pre>
 
@@ -87,6 +86,6 @@
 
 <h5>Valid</h5>
 <pre>{{ myForm.valid }}</pre>
-
+<!--
 <h5>Condiciones</h5>
 <pre>{{ myForm?.controls?.['terms']?.errors | json }}</pre> -->
