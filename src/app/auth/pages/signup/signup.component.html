@@ -3,16 +3,17 @@
 
 <main class="row">
   <section class="col">
-    <form autocomplete="off">
+    <form autocomplete="off" [formGroup]="myForm" (ngSubmit)="submitForm()">
       <div class="row mb-3">
         <label for="" class="col-sm-3 col-form-label">Nombre</label>
         <div class="col-sm-9">
           <input
             type="text"
             class="form-control"
+            formControlName="name"
             placeholder="Nombre del usuario"
           />
-          <span class="form-text text-danger"
+          <span *ngIf="notValidField('name')" class="form-text text-danger"
             >Debe ser en formato de nombre y apellido</span
           >
         </div>
@@ -64,9 +65,14 @@
 
       <div class="row">
         <div class="col">
-          <button class="btn btn-primary">Guardar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
       </div>
     </form>
   </section>
 </main>
+
+<h2>form Valid: {{ myForm.valid }}</h2>
+
+<h4>Nombre</h4>
+<pre>{{ myForm.controls["name"].errors | json }}</pre>
