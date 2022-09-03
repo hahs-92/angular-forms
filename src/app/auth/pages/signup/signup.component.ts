@@ -5,6 +5,12 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+//validations
+// import { patternName } from '../../../shared/validator/validations';
+// import { emailPattern } from '../../../shared/validator/validations';
+// import { striderNotAllow } from '../../../shared/validator/validations';
+//service
+import { ValidatorService } from '../../../shared/validator/validator.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,33 +18,32 @@ import {
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  patternName = '([a-zA-Z]+) ([a-zA-Z]+)';
-  emailPattern: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
-
-  striderNotAllow(control: FormControl) {
-    const value = control?.value;
-
-    if (value === 'strider') {
-      return { noStrider: true }; // con que devolvamos un obj estamos diciendo que es un error
-    }
-
-    return null;
-  }
-
   myForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.pattern(this.patternName)]],
+    name: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(this.validationService.patternName),
+      ],
+    ],
     email: [
       '',
       [
         Validators.required,
         Validators.email,
-        Validators.pattern(this.emailPattern),
+        Validators.pattern(this.validationService.emailPattern),
       ],
     ],
-    username: ['', [Validators.required, this.striderNotAllow]],
+    username: [
+      '',
+      [Validators.required, this.validationService.striderNotAllow],
+    ],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private validationService: ValidatorService
+  ) {}
 
   notValidField(field: string) {
     return this.myForm.get(field)?.invalid && this.myForm.get(field)?.touched;
