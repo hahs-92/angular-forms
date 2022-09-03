@@ -11,6 +11,7 @@ import {
 // import { striderNotAllow } from '../../../shared/validator/validations';
 //service
 import { ValidatorService } from '../../../shared/validator/validator.service';
+import { EmailValidatorService } from '../../../shared/validator/email-validator.service';
 
 @Component({
   selector: 'app-signup',
@@ -34,6 +35,7 @@ export class SignupComponent {
           Validators.email,
           Validators.pattern(this.validationService.emailPattern),
         ],
+        [this.emailValidator],
       ],
       username: [
         '',
@@ -50,7 +52,8 @@ export class SignupComponent {
 
   constructor(
     private fb: FormBuilder,
-    private validationService: ValidatorService
+    private validationService: ValidatorService,
+    private emailValidator: EmailValidatorService
   ) {}
 
   notValidField(field: string) {
