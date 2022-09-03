@@ -18,27 +18,35 @@ import { ValidatorService } from '../../../shared/validator/validator.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  myForm: FormGroup = this.fb.group({
-    name: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(this.validationService.patternName),
+  myForm: FormGroup = this.fb.group(
+    {
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(this.validationService.patternName),
+        ],
       ],
-    ],
-    email: [
-      '',
-      [
-        Validators.required,
-        Validators.email,
-        Validators.pattern(this.validationService.emailPattern),
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern(this.validationService.emailPattern),
+        ],
       ],
-    ],
-    username: [
-      '',
-      [Validators.required, this.validationService.striderNotAllow],
-    ],
-  });
+      username: [
+        '',
+        [Validators.required, this.validationService.striderNotAllow],
+      ],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      password2: ['', [Validators.required]],
+    },
+    {
+      //options sincronas y asincronas
+      validators: [this.validationService.sameFields('password', 'password2')],
+    }
+  );
 
   constructor(
     private fb: FormBuilder,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ export class ValidatorService {
 
   constructor() {}
 
-  striderNotAllow = (control: FormControl): ValidationErrors | null => {
+  striderNotAllow(control: FormControl): ValidationErrors | null {
     const value = control?.value;
 
     if (value === 'strider') {
@@ -18,5 +18,20 @@ export class ValidatorService {
     }
 
     return null;
-  };
+  }
+
+  sameFields(field1: string, field2: string) {
+    return (formGroup: AbstractControl) => {
+      const value1 = formGroup.get(field1)?.value;
+      const value2 = formGroup.get(field2)?.value;
+
+      if (value1 !== value2) {
+        formGroup.get(field2)?.setErrors({ noSame: true });
+        return { noSame: true }; //con el objeto le indicamos un error
+      }
+
+      formGroup.get(field2)?.setErrors(null); //quita los errores de ese campo
+      return null;
+    };
+  }
 }
