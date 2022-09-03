@@ -40,8 +40,12 @@
           <input
             type="text"
             class="form-control"
+            formControlName="username"
             placeholder="Username del usuario"
           />
+          <span *ngIf="notValidField('username')" class="form-text text-danger"
+            >El username es obligatorio</span
+          >
         </div>
       </div>
 
