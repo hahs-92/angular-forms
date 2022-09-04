@@ -20,7 +20,7 @@ export class EmailValidatorService implements AsyncValidator {
 
     //si el correo ya existe retornamos el objeto indicando el error
     return this.http.get<any[]>(`http://localhost:3000/users?q=${email}`).pipe(
-      delay(5000),
+      delay(3000),
       map((resp) => {
         return resp.length === 0 ? null : { emailNotAvaliable: true };
       })
