@@ -5,7 +5,7 @@ import {
   AsyncValidator,
   ValidationErrors,
 } from '@angular/forms';
-import { map, Observable } from 'rxjs';
+import { delay, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +20,7 @@ export class EmailValidatorService implements AsyncValidator {
 
     //si el correo ya existe retornamos el objeto indicando el error
     return this.http.get<any[]>(`http://localhost:3000/users?q=${email}`).pipe(
+      delay(5000),
       map((resp) => {
         return resp.length === 0 ? null : { emailNotAvaliable: true };
       })

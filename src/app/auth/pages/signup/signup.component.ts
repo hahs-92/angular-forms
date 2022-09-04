@@ -19,6 +19,7 @@ import { EmailValidatorService } from '../../../shared/validator/email-validator
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
+  //utilizamos un db fake para simular las validaciones asincronas
   myForm: FormGroup = this.fb.group(
     {
       name: [
