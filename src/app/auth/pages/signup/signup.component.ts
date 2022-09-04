@@ -61,6 +61,29 @@ export class SignupComponent {
     return this.myForm.get(field)?.invalid && this.myForm.get(field)?.touched;
   }
 
+  emailRequired() {
+    //this.myForm.get('email')?.hasError('required');
+    // tambien se podria acceder al required asi
+    return (
+      this.myForm.get('email')?.errors?.['required'] &&
+      this.myForm.get('email')?.touched
+    );
+  }
+
+  checkPatterEmail() {
+    return (
+      this.myForm.get('email')?.errors?.['pattern'] &&
+      this.myForm.get('email')?.touched
+    );
+  }
+
+  emailNotAvaliable() {
+    return (
+      this.myForm.get('email')?.errors?.['emailNotAvaliable'] &&
+      this.myForm.get('email')?.touched
+    );
+  }
+
   submitForm() {
     console.log(this.myForm.value);
 

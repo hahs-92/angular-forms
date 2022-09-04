@@ -28,8 +28,14 @@
             class="form-control"
             placeholder="Email del usuario"
           />
-          <span *ngIf="notValidField('email')" class="form-text text-danger"
+          <span *ngIf="emailRequired()" class="form-text text-danger"
             >El correo es obligatorio</span
+          >
+          <span *ngIf="checkPatterEmail()" class="form-text text-danger"
+            >El correo no cumple con el formato</span
+          >
+          <span *ngIf="emailNotAvaliable()" class="form-text text-danger"
+            >El correo no esta disponible</span
           >
         </div>
       </div>
